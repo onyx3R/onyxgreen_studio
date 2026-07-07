@@ -1,0 +1,577 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Green Bean - Sorcial media Services</title>
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+        body {
+            background: radial-gradient(circle at 50% 0%, #0d1f14 0%, #070d09 40%, #030504 100%);
+            color: #ffffff;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+            position: relative;
+        }
+        .ambient-glow {
+            position: absolute;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(0, 255, 102, 0.08) 0%, rgba(0, 255, 102, 0) 70%);
+            border-radius: 50%;
+            filter: blur(60px);
+            z-index: -1;
+            pointer-events: none;
+        }
+        .glow-1 {
+            top: 15%;
+            left: 10%;
+            animation: floatAround 18s ease-in-out infinite alternate;
+        }
+        .glow-2 {
+            top: 55%;
+            right: 5%;
+            animation: floatAround 25s ease-in-out infinite alternate-reverse;
+        }
+
+        @keyframes floatAround {
+            0% { transform: translate(0, 0) scale(1); }
+            50% { transform: translate(60px, 40px) scale(1.2); }
+            100% { transform: translate(-40px, 80px) scale(0.9); }
+        }
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            background: rgba(7, 13, 9, 0.75);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-bottom: 1px solid rgba(0, 255, 102, 0.1);
+            padding: 20px 0 15px 0;
+        }
+        .header-title {
+            color: #00ff66;
+            text-align: center;
+            font-size: 36px;
+            margin: 0 0 15px 0;
+            letter-spacing: 2px;
+            font-weight: bold;
+            text-shadow: 0 0 15px rgba(0, 255, 102, 0.2);
+        }
+        .subcategory-container {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin: 0;
+        }
+        .sub-link {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(0, 255, 102, 0.2);
+            color: #ffffff;
+            padding: 10px 22px;
+            border-radius: 50px;
+            font-weight: bold;
+            font-size: 14px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        .sub-link:hover {
+            background: #00ff66;
+            color: #000000;
+            box-shadow: 0 0 15px rgba(0, 255, 102, 0.4);
+            transform: translateY(-2px);
+        }
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 200px 0 60px 0;
+        }
+        .section-title {
+            color: #00ff66;
+            text-align: center;
+            font-size: 28px;
+            margin-bottom: 40px;
+            letter-spacing: 1px;
+            text-shadow: 0 0 10px rgba(0, 255, 102, 0.1);
+        }
+        .designers-container {
+            display: flex;
+            gap: 30px;
+            margin-bottom: 80px;
+            flex-wrap: wrap;
+        }
+        .designer-card {
+            flex: 1;
+            min-width: 280px;
+            background: rgba(255, 255, 255, 0.02);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 24px;
+            padding: 30px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+        .designer-card:hover {
+            border-color: rgba(0, 255, 102, 0.4);
+            transform: translateY(-4px);
+            box-shadow: 0 10px 25px rgba(0, 255, 102, 0.05);
+        }
+        .designer-avatar {
+            width: 110px;
+            height: 110px;
+            border-radius: 50%;
+            border: 3px solid #00ff66;
+            object-fit: cover;
+            margin-bottom: 15px;
+            box-shadow: 0 0 15px rgba(0, 255, 102, 0.2);
+        }
+        .designer-card h3 {
+            margin: 10px 0 5px 0;
+            font-size: 22px;
+            color: #ffffff;
+        }
+        .designer-card p {
+            color: #b3b3b3;
+            font-size: 14px;
+            line-height: 1.5;
+            margin-bottom: 15px;
+        }
+        .stars {
+            color: #ffcc00;
+            font-size: 18px;
+            letter-spacing: 2px;
+        }
+        .gallery-section {
+            padding-top: 30px;
+            margin-bottom: 80px;
+            border-top: 1px solid rgba(0, 255, 102, 0.1);
+            scroll-margin-top: 170px;
+        }
+        .gallery-title {
+            color: #00ff66;
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        .image-line {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        .image-line img {
+            flex: 1;
+            width: 25%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+        .image-line img:hover {
+            transform: scale(1.03);
+            border-color: #00ff66;
+            box-shadow: 0 8px 20px rgba(0, 255, 102, 0.15);
+        }
+        .gallery-description {
+            color: #d4d4d4;
+            font-size: 15px;
+            line-height: 1.6;
+            margin: 0;
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 18px;
+            border-radius: 12px;
+        }
+        .action-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            margin-top: 25px;
+        }
+        .btn-review {
+            display: inline-block;
+            background: transparent;
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            color: #ffffff;
+            padding: 12px 28px;
+            border-radius: 50px;
+            font-weight: bold;
+            font-size: 14px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        .btn-review:hover {
+            border-color: #ffffff;
+            background: rgba(255, 255, 255, 0.08);
+        }
+        .btn-buy {
+            display: inline-block;
+            background: #00ff66;
+            border: 1px solid #00ff66;
+            color: #000000;
+            padding: 12px 35px;
+            border-radius: 50px;
+            font-weight: bold;
+            font-size: 14px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0, 255, 102, 0.2);
+        }
+        .btn-buy:hover {
+            background: #ffffff;
+            border-color: #ffffff;
+            box-shadow: 0 0 25px #00ff66;
+            transform: translateY(-1px);
+        }
+		.logo-btn {
+    position: absolute;
+    left: 50px;           
+    top: 15px;            
+    color: #00ff66;       
+    text-decoration: none;
+    font-weight: bold;    
+    font-size: 25px;      
+    letter-spacing: 1px;  
+    text-transform: uppercase; 
+    cursor: pointer;      
+    transition: opacity 0.2s ease; 
+}
+
+
+.logo-btn:hover, .logo-btn:focus, .logo-btn:active {
+    color: #00ff66;
+    text-decoration: none;
+    opacity: 0.85;       
+    outline: none;
+}
+    </style>
+</head>
+<body>
+    <div class="ambient-glow glow-1"></div>
+    <div class="ambient-glow glow-2"></div>
+	<div class="ambient-glow glow-3"></div>
+    <header>
+	 <a href="index.html" class="logo-btn">ONYX GREEN</a>
+        <div class="header-title">Sorcial Media sudio</div>
+        <div class="subcategory-container">
+            <a href="#vector" class="sub-link">Facebook Posts</a>
+            <a href="#3d" class="sub-link">Instagram Posts</a>
+            <a href="#lineart" class="sub-link">YouTube Thumbnails</a>
+            <a href="#pencil" class="sub-link">Reddit & X Posts</a>
+			<a href="#pint" class="sub-link">Pinterest Pins</a>
+        </div>
+    </header>
+    <div class="container">
+        <h2 class="section-title">Meet Our Expert Designers</h2>
+        <div class="designers-container">
+            <div class="designer-card">
+                <img src="95.jpg" alt="Lead Designer" class="designer-avatar">
+                <h3>Rikula </h3>
+                <p>Expert in scroll-stopping Social Media creatives, campaign-focused visual content, and cohesive digital brand experiences.</p>
+                <div class="stars">★★★★★</div>
+            </div>
+            <div class="designer-card">
+                <img src="96.avif" alt="Concept Artist" class="designer-avatar">
+                <h3>Anuhas</h3>
+                <p>Designs engaging Social Media content that boosts brand visibility with creative posts, striking visuals, and consistent digital branding.</p>
+                <div class="stars">★★★★★</div>
+            </div>
+						            <div class="designer-card">
+                <img src="96.png" alt="Concept Artist" class="designer-avatar">
+                <h3>Kasun.G</h3>
+                <p>Expert in engaging Social Media Design, high-converting promotional creatives, and consistent digital branding for every platform.</p>
+                <div class="stars">★★★★☆</div>
+            </div>
+        </div>
+
+        <h2 class="section-title" style="margin-top: 40px;">Our Work Showcase</h2>
+        <div id="vector" class="gallery-section">
+            <h3 class="gallery-title">Facebook Posts Gallery</h3>
+            <div class="image-line">
+                <img src="104.png" alt="Vector Sample 1">
+                <img src="105.png" alt="Vector Sample 2">
+                <img src="105.jpg" alt="Vector Sample 3">
+                <img src="106.png" alt="Vector Sample 4">
+            </div>
+            <p class="gallery-description">
+Our Facebook Post designs are crafted to increase engagement and strengthen your brand presence. From promotional campaigns to informative content, every post is optimized to capture attention and encourage meaningful audience interaction</p>
+<div class="action-container">           
+                <a href="file:///D:/web%20project/project/900.html#contact" target="_blank" class="btn-review">Customer Reviews</a>
+                <a href="900.html" target="_blank" class="btn-buy">Buy Now</a>
+            </div>
+        </div>
+        <div id="3d" class="gallery-section">
+            <h3 class="gallery-title">Instagram Posts Gallery</h3>
+            <div class="image-line">
+                <img src="109.png" alt="Vector Sample 1">
+                <img src="108.png" alt="Vector Sample 2">
+                <img src="110.png" alt="Vector Sample 3">
+                <img src="107.png" alt="Vector Sample 4">
+            </div>
+            <p class="gallery-description">
+Our Instagram designs focus on visually compelling content that enhances your brand identity. We create eye-catching posts, carousel graphics, and promotional visuals that inspire engagement and grow your audience.            </p>
+            </p>
+            <div class="action-container">
+                <a href="file:///D:/web%20project/project/925.html#contact" target="_blank" class="btn-review">Customer Reviews</a>
+                <a href="925.html" target="_blank" class="btn-buy">Buy Now</a>
+            </div>
+        </div>
+        <div id="lineart" class="gallery-section">
+            <h3 class="gallery-title">YouTube Thumbnails Gallery</h3>
+            <div class="image-line">
+                <img src="111.png" alt="Vector Sample 1">
+                <img src="114.png" alt="Vector Sample 2">
+                <img src="113.png" alt="Vector Sample 3">
+                <img src="112.png" alt="Vector Sample 4">
+            </div>
+            <p class="gallery-description">
+Our YouTube Thumbnail designs are built to maximize click-through rates with bold visuals, clear messaging, and attention-grabbing compositions that help your videos stand out in crowded feeds.            </p>
+            <div class="action-container">
+                <a href="file:///D:/web%20project/project/940.html#contact" target="_blank" class="btn-review">Customer Reviews</a>
+                <a href="940.html" target="_blank" class="btn-buy">Buy Now</a>
+            </div>
+        </div>
+        <div id="pencil" class="gallery-section">
+            <h3 class="gallery-title">Reddit & X Posts Gallery</h3>
+            <div class="image-line">
+                <img src="115.png" alt="Vector Sample 1">
+                <img src="116.png" alt="Vector Sample 2">
+
+            </div>
+            <p class="gallery-description">
+Our Reddit and X post designs deliver clean, impactful visuals tailored for fast-moving conversations. We create engaging promotional graphics that encourage interaction while maintaining a professional brand presence.            </p>
+            <div class="action-container">
+                <a href="file:///D:/web%20project/project/950.html#contact" target="_blank" class="btn-review">Customer Reviews</a>
+                <a href="950.html" target="_blank" class="btn-buy">Buy Now</a>
+            </div>
+        </div>
+		        <div id="pint" class="gallery-section">
+            <h3 class="gallery-title">Pinterest Pins Gallery</h3>
+            <div class="image-line">
+                <img src="p1.png" alt="Vector Sample 1">
+                <img src="p2.png" alt="Vector Sample 2">
+                <img src="p3.png" alt="Vector Sample 3">
+                <img src="p4.png" alt="Vector Sample 4">
+            </div>
+            <p class="gallery-description">
+Our Pinterest Pin designs combine creativity with strategic layouts to increase discoverability and drive long-term traffic. Every pin is optimized to attract viewers, inspire saves, and showcase your brand effectively.            </p>
+            <div class="action-container">
+                <a href="file:///D:/web%20project/project/975.html#contact" target="_blank" class="btn-review">Customer Reviews</a>
+                <a href="975.html" target="_blank" class="btn-buy">Buy Now</a>
+            </div>
+        </div>
+
+    </div>
+	<style>
+    footer {
+        background: rgba(5, 10, 6, 0.8);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+        border-top: 1px solid rgba(0, 255, 102, 0.1);
+        padding: 60px 0 30px 0;
+        margin-top: 120px;
+        width: 100%;
+    }
+
+    .footer-container {
+        width: 90%;
+        max-width: 1200px;
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 40px;
+    }
+
+    .footer-column h3 {
+        color: #ffffff;
+        font-size: 16px;
+        font-weight: bold;
+        text-transform: uppercase;
+        letter-spacing: 1.5px;
+        margin: 0 0 25px 0;
+    }
+
+    .footer-links {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .footer-links li {
+        margin-bottom: 12px;
+    }
+
+    .footer-links a {
+        color: #a3a3a3;
+        text-decoration: none;
+        font-size: 14px;
+        transition: color 0.2s ease, padding-left 0.2s ease;
+        display: inline-block;
+    }
+
+    .footer-links a:hover {
+        color: #00ff66;
+        padding-left: 4px;
+        text-shadow: 0 0 10px rgba(0, 255, 102, 0.3);
+    }
+
+    .social-grid {
+        display: flex;
+        gap: 15px;
+        flex-wrap: wrap;
+        max-width: 200px;
+    }
+
+    .social-icon {
+        width: 35px;
+        height: 35px;
+        background: rgba(255, 255, 255, 0.03);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #ffffff;
+        text-decoration: none;
+        font-size: 16px;
+        transition: all 0.3s ease;
+    }
+
+    .social-icon:hover {
+        background: rgba(0, 255, 102, 0.1);
+        border-color: #00ff66;
+        color: #00ff66;
+        box-shadow: 0 0 12px rgba(0, 255, 102, 0.2);
+        transform: translateY(-2px);
+    }
+
+    .footer-bottom {
+        width: 90%;
+        max-width: 1200px;
+        margin: 40px auto 0 auto;
+        padding-top: 25px;
+        border-top: 1px solid rgba(255, 255, 255, 0.05);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 15px;
+    }
+
+    .copyright {
+        color: #737373;
+        font-size: 13px;
+        margin: 0;
+    }
+
+    .legal-links {
+        display: flex;
+        gap: 20px;
+    }
+
+    .legal-links a {
+        color: #737373;
+        text-decoration: none;
+        font-size: 13px;
+        transition: color 0.2s ease;
+    }
+
+    .legal-links a:hover {
+        color: #ffffff;
+    }
+
+    /* Responsive Breakdown */
+    @media (max-width: 900px) {
+        .footer-container { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 500px) {
+        .footer-container { grid-template-columns: 1fr; }
+    }
+	.collab-btn {
+    display: inline-block;
+    margin-top: 20px; 
+    padding: 10px 20px;
+    background: rgba(0, 212, 255, 0.1);
+    border: 1px solid #ffffff;
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: bold;
+    border-radius: 6px;
+    transition: all 0.3s ease;
+    text-align: center;
+    width: fit-content; 
+}
+.collab-btn:hover {
+    background: #ffffff;
+    color: #050a06;
+    box-shadow: 0 0 15px rgba(0, 212, 255, 0.5);
+    transform: translateY(-2px);
+}
+</style
+    <footer>
+        <div class="footer-container">
+            <div class="footer-column">
+                <h3>Company</h3>
+                <ul class="footer-links">
+                    <li><a href="About.html">About Us</a></li>
+                    <li><a href="gallery.html">Our Studio</a></li>
+                    <li><a href="dev.html">Creative Blog</a></li>
+                    <li><a href="dev.html">Careers</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Services</h3>
+                <ul class="footer-links">
+                    <li><a href="graphic desing.html">Graphic desing</a></li>
+                    <li><a href="illutrate .html">illutrate </a></li>
+                    <li><a href="logo desing.html">Logo desing</a></li>
+                    <li><a href="sorcial media .html">Social Strategy</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Support</h3>
+                <ul class="footer-links">
+                    <li><a href="cont.html">Help Center / FAQ</a></li>
+                    <li><a href="dev.html">Licensing Agreements</a></li>
+                    <li><a href="dev.html">Refund Checkpoints</a></li>
+                    <li><a href="dev.html">Privacy Framework</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Contact Connection</h3>
+                <div class="social-grid">
+                    <a href="https://facebook.com/" class="social-icon"target="_blank">📸</a>
+                    <a href="https://discord.com/" class="social-icon"target="_blank">🎮</a>
+                    <a href="https://x.com/" class="social-icon"target="_blank">𝕏</a>
+                    <a href="https://www.youtube.com" class="social-icon"target="_blank">▶</a>
+                    <a href="https://instagram .com/" class="social-icon"target="_blank">👤</a>
+                    <a href="https://whatsapp.com/" class="social-icon"target="_blank">💬</a>
+					<a href="https://forms.gle/xAJhxQWeJoQ88QZG8" class="collab-btn" target="_blank">Collaborate with us</a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p class="copyright">&copy; 2026 3R Group. All rights reserved by  Onyx Green Studio.</p>
+            <div class="legal-links">
+                <a href="dev.html">Privacy Policy</a>
+                <a href="dev.html">Terms of Use</a>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>

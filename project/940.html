@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YouTube Thumbnail Design Packages - ONYX Green</title>
+    <style>
+        html { scroll-behavior: smooth; }
+        body {
+            background: radial-gradient(circle at 50% 0%, #0d1f14 0%, #070d09 40%, #030504 100%);
+            color: #ffffff;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        .ambient-glow {
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(0,255,102,0.08) 0%, rgba(0,255,102,0) 70%);
+            border-radius: 50%;
+            filter: blur(80px);
+            z-index: -1;
+            pointer-events: none;
+        }
+        .glow-1 { top: 5%; left: 10%; }
+        .glow-2 { top: 45%; right: 10%; }
+
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            background: rgba(7,13,9,0.75);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-bottom: 1px solid rgba(0,255,102,0.1);
+            padding: 20px 0;
+        }
+
+        .header-title {
+            color: #00ff66;
+            text-align: center;
+            font-size: 32px;
+            margin: 0;
+            letter-spacing: 2px;
+            font-weight: bold;
+            text-shadow: 0 0 15px rgba(0,255,102,0.2);
+        }
+
+        .back-nav {
+            position: absolute;
+            left: 5%;
+            top: 25px;
+        }
+
+        .back-link {
+            color: #a3a3a3;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 14px;
+            transition: color 0.3s;
+        }
+        .back-link:hover { color: #00ff66; }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 160px 0 60px 0;
+        }
+
+        .page-title {
+            color: #ffffff;
+            text-align: center;
+            font-size: 38px;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+        .page-title span {
+            color: #00ff66;
+            text-shadow: 0 0 15px rgba(0,255,102,0.2);
+        }
+
+        .page-subtitle {
+            color: #b3b3b3;
+            text-align: center;
+            font-size: 16px;
+            margin-bottom: 50px;
+        }
+
+        .packages-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin-bottom: 100px;
+        }
+
+        .package-card {
+            background: rgba(255,255,255,0.02);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border: 1px solid rgba(255,255,255,0.06);
+            border-radius: 24px;
+            padding: 40px 30px;
+            text-align: center;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .package-card.popular {
+            border-color: rgba(0,255,102,0.4);
+            background: rgba(0,255,102,0.01);
+            box-shadow: 0 10px 30px rgba(0,255,102,0.03);
+            transform: scale(1.03);
+        }
+
+        .popular-badge {
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #00ff66;
+            color: #000;
+            font-size: 11px;
+            font-weight: bold;
+            text-transform: uppercase;
+            padding: 5px 15px;
+            border-radius: 20px;
+            letter-spacing: 1px;
+        }
+
+        .package-card:hover {
+            border-color: #00ff66;
+            box-shadow: 0 15px 35px rgba(0,255,102,0.08);
+        }
+
+        .package-name {
+            font-size: 22px;
+            color: #fff;
+            margin: 0 0 15px 0;
+            font-weight: bold;
+        }
+
+        .package-price {
+            font-size: 46px;
+            color: #00ff66;
+            font-weight: bold;
+            margin-bottom: 25px;
+        }
+        .package-price span {
+            font-size: 14px;
+            color: #a3a3a3;
+            font-weight: normal;
+        }
+
+        .package-features {
+            list-style: none;
+            padding: 0;
+            margin: 0 0 35px 0;
+            text-align: left;
+        }
+
+        .package-features li {
+            color: #d4d4d4;
+            font-size: 14px;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            line-height: 1.5;
+        }
+
+        .package-features li::before {
+            content: "✓";
+            color: #00ff66;
+            font-weight: bold;
+        }
+
+        .btn-buy-now {
+            display: block;
+            width: 100%;
+            background: #00ff66;
+            border: 1px solid #00ff66;
+            color: #000;
+            padding: 14px 0;
+            border-radius: 50px;
+            font-weight: bold;
+            font-size: 15px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0,255,102,0.2);
+            box-sizing: border-box;
+        }
+
+        .package-card:not(.popular) .btn-buy-now {
+            background: transparent;
+            border-color: rgba(255,255,255,0.2);
+            color: #fff;
+            box-shadow: none;
+        }
+
+        .btn-buy-now:hover {
+            background: #fff;
+            border-color: #fff;
+            color: #000;
+            box-shadow: 0 0 25px #00ff66;
+            transform: translateY(-2px);
+        }
+
+        .reviews-section {
+            border-top: 1px solid rgba(0,255,102,0.1);
+            padding-top: 60px;
+        }
+
+        .reviews-main-title {
+            color: #00ff66;
+            font-size: 28px;
+            text-align: center;
+            margin-bottom: 40px;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+
+        .reviews-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 25px;
+        }
+
+        .review-ss-card {
+            width: 100%;
+            height: auto;
+            border-radius: 20px;
+            border: 1px solid rgba(255,255,255,0.06);
+            background: rgba(255,255,255,0.01);
+            transition: transform 0.3s ease, border-color 0.3s ease;
+        }
+
+        .review-ss-card:hover {
+            transform: scale(1.02);
+            border-color: #00ff66;
+            box-shadow: 0 10px 25px rgba(0,255,102,0.1);
+        }
+
+        footer {
+            background: rgba(5,10,6,0.8);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-top: 1px solid rgba(0,255,102,0.1);
+            padding: 60px 0 30px 0;
+            margin-top: 120px;
+            width: 100%;
+        }
+
+        .footer-container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 40px;
+        }
+
+        .footer-column h3 {
+            color: #fff;
+            font-size: 16px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin: 0 0 25px 0;
+        }
+
+        .footer-links {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .footer-links li { margin-bottom: 12px; }
+
+        .footer-links a {
+            color: #a3a3a3;
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.2s ease, padding-left 0.2s ease;
+            display: inline-block;
+        }
+
+        .footer-links a:hover {
+            color: #00ff66;
+            padding-left: 4px;
+        }
+
+        .social-grid {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .social-icon {
+            width: 35px;
+            height: 35px;
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            text-decoration: none;
+        }
+
+        .footer-bottom {
+            width: 90%;
+            max-width: 1200px;
+            margin: 40px auto 0 auto;
+            padding-top: 25px;
+            border-top: 1px solid rgba(255,255,255,0.05);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .copyright { color: #737373; font-size: 13px; margin: 0; }
+        .legal-links { display: flex; gap: 20px; }
+        .legal-links a {
+            color: #737373;
+            text-decoration: none;
+            font-size: 13px;
+        }
+
+        @media (max-width: 968px) {
+            .packages-grid { grid-template-columns: 1fr; gap: 40px; }
+            .package-card.popular { transform: none; }
+            .reviews-grid { grid-template-columns: 1fr; }
+            .footer-container { grid-template-columns: repeat(2, 1fr); }
+        }
+
+        @media (max-width: 500px) {
+            .footer-container { grid-template-columns: 1fr; }
+        }
+		.collab-btn {
+    display: inline-block;
+    margin-top: 20px; 
+    padding: 10px 20px;
+    background: rgba(0, 212, 255, 0.1);
+    border: 1px solid #ffffff;
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: bold;
+    border-radius: 6px;
+    transition: all 0.3s ease;
+    text-align: center;
+    width: fit-content; 
+}
+.collab-btn:hover {
+    background: #ffffff;
+    color: #050a06;
+    box-shadow: 0 0 15px rgba(0, 212, 255, 0.5);
+    transform: translateY(-2px);
+}
+    </style>
+</head>
+<body>
+
+    <div class="ambient-glow glow-1"></div>
+    <div class="ambient-glow glow-2"></div>
+
+    <header>
+        <div class="back-nav">
+            <a href="sorcial media .html" class="back-link">← Gallery</a>
+        </div>
+        <div class="header-title">YouTube Thumbnail Design</div>
+    </header>
+
+    <div class="container">
+        <h1 class="page-title">YouTube Thumbnail Design <span>Packages</span></h1>
+        <p class="page-subtitle">
+            Click-focused YouTube thumbnail designs for creators, brands, tutorials, gaming channels, reaction videos, podcasts, and business content.
+        </p>
+
+        <div class="packages-grid">
+
+            <div class="package-card">
+                <div class="package-name">Basic Plan</div>
+                <div class="package-price">$15 <span></span></div>
+                <ul class="package-features">
+                    <li>1 custom YouTube thumbnail design</li>
+                    <li>Bold text layout for better click visibility</li>
+                    <li>Image cutout, glow, contrast, and background enhancement</li>
+                    <li>Perfect for tutorials, vlogs, gaming, and commentary videos</li>
+					 <li>JPG / PNG delivery optimized for YouTube upload</li>
+                    <li>2 revision rounds</li>
+					<li>2 Day  delivery</li>
+                   
+                </ul>
+                <a href="xxx" class="btn-buy-now">Select Basic</a>
+            </div>
+
+            <div class="package-card popular">
+                <div class="popular-badge">Most Popular</div>
+                <div class="package-name">Standard Plan</div>
+                <div class="package-price">$25 <span></span></div>
+                <ul class="package-features">
+                    <li>3 professional YouTube thumbnail designs</li>
+                    <li>CTR-focused visual composition and title emphasis</li>
+                    <li>Face highlight,arrows, badges, and attention elements</li>
+                    <li>Consistent style for one content series </li>
+                    <li>Up to 4 revisions</li>
+                    <li>High-quality PNG / JPG exports for all thumbnails</li>
+					<li>2 Day  delivery</li>
+                </ul>
+                <a href="xxx" class="btn-buy-now">Select Standard</a>
+            </div>
+
+            <div class="package-card">
+                <div class="package-name">Premium Plan</div>
+                <div class="package-price">$50 <span></span></div>
+                <ul class="package-features">
+                    <li>6 premium YouTube thumbnails</li>
+                    <li>Advanced click-driven design strategy for stronger visual performance</li>
+                    <li>Custom style matching your channel branding and audience</li>
+                    <li>Ideal for educational, business, reaction, documentary, and creator content</li>
+                    <li>Priority revisions </li>
+                    <li>Final files optimized for YouTube engagement and presentation</li>
+					<li>High-quality PNG / JPG/Psd exports for all thumbnails</li>
+					<li>2 Day  delivery</li>
+                </ul>
+                <a href="xxx" class="btn-buy-now">Select Premium</a>
+            </div>
+
+        </div>
+
+        <section id="contact">
+            <div class="reviews-section">
+                <h2 class="reviews-main-title">Verified YouTube Thumbnail Client Reviews</h2>
+                <div class="reviews-grid">
+                    <img src="sy1.png" alt="Customer Review Screenshot" class="review-ss-card">
+                    <img src="sy2.png" alt="Customer Review Screenshot" class="review-ss-card">
+                </div>
+            </div>
+        </section>
+    </div>
+	<style>
+    footer {
+        background: rgba(5, 10, 6, 0.8);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+        border-top: 1px solid rgba(0, 255, 102, 0.1);
+        padding: 60px 0 30px 0;
+        margin-top: 120px;
+        width: 100%;
+    }
+
+    .footer-container {
+        width: 90%;
+        max-width: 1200px;
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 40px;
+    }
+
+    .footer-column h3 {
+        color: #ffffff;
+        font-size: 16px;
+        font-weight: bold;
+        text-transform: uppercase;
+        letter-spacing: 1.5px;
+        margin: 0 0 25px 0;
+    }
+
+    .footer-links {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .footer-links li {
+        margin-bottom: 12px;
+    }
+
+    .footer-links a {
+        color: #a3a3a3;
+        text-decoration: none;
+        font-size: 14px;
+        transition: color 0.2s ease, padding-left 0.2s ease;
+        display: inline-block;
+    }
+
+    .footer-links a:hover {
+        color: #00ff66;
+        padding-left: 4px;
+        text-shadow: 0 0 10px rgba(0, 255, 102, 0.3);
+    }
+
+    .social-grid {
+        display: flex;
+        gap: 15px;
+        flex-wrap: wrap;
+        max-width: 200px;
+    }
+
+    .social-icon {
+        width: 35px;
+        height: 35px;
+        background: rgba(255, 255, 255, 0.03);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #ffffff;
+        text-decoration: none;
+        font-size: 16px;
+        transition: all 0.3s ease;
+    }
+
+    .social-icon:hover {
+        background: rgba(0, 255, 102, 0.1);
+        border-color: #00ff66;
+        color: #00ff66;
+        box-shadow: 0 0 12px rgba(0, 255, 102, 0.2);
+        transform: translateY(-2px);
+    }
+
+    .footer-bottom {
+        width: 90%;
+        max-width: 1200px;
+        margin: 40px auto 0 auto;
+        padding-top: 25px;
+        border-top: 1px solid rgba(255, 255, 255, 0.05);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 15px;
+    }
+
+    .copyright {
+        color: #737373;
+        font-size: 13px;
+        margin: 0;
+    }
+
+    .legal-links {
+        display: flex;
+        gap: 20px;
+    }
+
+    .legal-links a {
+        color: #737373;
+        text-decoration: none;
+        font-size: 13px;
+        transition: color 0.2s ease;
+    }
+
+    .legal-links a:hover {
+        color: #ffffff;
+    }
+
+    /* Responsive Breakdown */
+    @media (max-width: 900px) {
+        .footer-container { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 500px) {
+        .footer-container { grid-template-columns: 1fr; }
+    }
+</style
+    <footer>
+        <div class="footer-container">
+            <div class="footer-column">
+                <h3>Company</h3>
+                <ul class="footer-links">
+                    <li><a href="About.html">About Us</a></li>
+                    <li><a href="gallery.html">Our Studio</a></li>
+                    <li><a href="dev.html">Creative Blog</a></li>
+                    <li><a href="dev.html">Careers</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Services</h3>
+                <ul class="footer-links">
+                    <li><a href="graphic desing.html">Graphic desing</a></li>
+                    <li><a href="illutrate .html">illutrate </a></li>
+                    <li><a href="logo desing.html">Logo desing</a></li>
+                    <li><a href="sorcial media .html">Social Strategy</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Support</h3>
+                <ul class="footer-links">
+                    <li><a href="cont.html">Help Center / FAQ</a></li>
+                    <li><a href="dev.html">Licensing Agreements</a></li>
+                    <li><a href="dev.html">Refund Checkpoints</a></li>
+                    <li><a href="dev.html">Privacy Framework</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Contact Connection</h3>
+                <div class="social-grid">
+                    <a href="https://facebook.com/" class="social-icon"target="_blank">📸</a>
+                    <a href="https://discord.com/" class="social-icon"target="_blank">🎮</a>
+                    <a href="https://x.com/" class="social-icon"target="_blank">𝕏</a>
+                    <a href="https://www.youtube.com" class="social-icon"target="_blank">▶</a>
+                    <a href="https://instagram .com/" class="social-icon"target="_blank">👤</a>
+                    <a href="https://whatsapp.com/" class="social-icon"target="_blank">💬</a>
+					<a href="https://forms.gle/xAJhxQWeJoQ88QZG8" class="collab-btn" target="_blank">Collaborate with us</a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p class="copyright">&copy; 2026 3R Group. All rights reserved by  Onyx Green Studio.</p>
+            <div class="legal-links">
+                <a href="dev.html">Privacy Policy</a>
+                <a href="dev.html">Terms of Use</a>
+            </div>
+        </div>
+    </footer>
+
+
+</body>
+</html>
